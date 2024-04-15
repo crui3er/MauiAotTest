@@ -12,5 +12,6 @@ Global
 		{ECC53B66-C921-4A34-A02D-0858FDF1F12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECC53B66-C921-4A34-A02D-0858FDF1F12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECC53B66-C921-4A34-A02D-0858FDF1F12B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECC53B66-C921-4A34-A02D-0858FDF1F12B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
