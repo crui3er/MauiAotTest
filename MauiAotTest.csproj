@@ -40,9 +40,18 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
+<!--    <PropertyGroup>-->
+<!--        <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>-->
+<!--    </PropertyGroup>-->
+    
     <PropertyGroup>
-        <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+        <AndroidUseDefaultAotProfile>false</AndroidUseDefaultAotProfile>
+        <MauiUseDefaultAotProfile>false</MauiUseDefaultAotProfile>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <AndroidAotProfile Include="$(MSBuildThisFileDirectory)custom.aprof" />
+    </ItemGroup>
 
     <ItemGroup>
         <!-- App Icon -->
@@ -68,5 +77,14 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
     </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+        <PackageReference Include="Mono.AotProfiler.Android" Version="7.0.0"/>
+    </ItemGroup>
+
+    <Target Name="DumpCustomAotProfile"
+            DependsOnTargets="_ResolveSdks;_ResolveMonoAndroidSdks">
+        <Exec Command="&quot;$(AProfUtilToolPath)aprofutil&quot; &quot;$(AndroidAotCustomProfilePath)&quot; > &quot;$(AndroidAotCustomProfilePath).stat.txt&quot;" />
+    </Target>
 
 </Project>
